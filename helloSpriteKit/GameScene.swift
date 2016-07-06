@@ -36,15 +36,31 @@ class GameScene: SKScene {
         
         self.insertToTree(5)
         self.insertToTree(2)
+        self.insertToTree(1)
         //self.tree = tree.rotate_RL()
         
         man.position = CGPointMake(self.frame.size.width/2, self.getTreeYAtDepth(1.0) + 50)
         
         displayEntireTree()
         
+        //display the rotation buttons
+        let buttonarr = [Button.init(text: "L", name: "left"),
+                         Button.init(text: "R", name: "right"),
+                         Button.init(text: "LR", name: "left-right"),
+                         Button.init(text: "RL", name:  "right-left")]
+        
+        
         //add elements to self
+        for button in buttonarr
+        {
+            self.addChild(button)
+        }
         self.addChild(myLabel)
         self.addChild(man)
+        
+        //position setting
+        Button.addPositionsAndSizes(buttonarr,
+                                    screenSize: CGSizeMake(self.frame.width, self.frame.height))
     }
     
     //tree displaying code
@@ -120,6 +136,9 @@ class GameScene: SKScene {
         }else if (abs(balanceFactor) > 1)
         {
             myLabel.text = "Game over"
+            //make the man fall down the heap
+            
+            //let rotate = SKAction.rotateByAngle(CGFloat(M_PI/4), duration:5)
         }
         
     }

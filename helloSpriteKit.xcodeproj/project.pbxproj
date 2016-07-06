@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AA2AFAD1D2DBAA2005A220D /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2AFAC1D2DBAA2005A220D /* Button.swift */; };
+		9AA2AFAF1D2DCA33005A220D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9AA2AFAE1D2DCA33005A220D /* GameScene.sks */; };
 		9AFD42131D2C1DC4007D9FC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD42121D2C1DC4007D9FC4 /* AppDelegate.swift */; };
-		9AFD42151D2C1DC4007D9FC4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD42141D2C1DC4007D9FC4 /* GameScene.sks */; };
 		9AFD42171D2C1DC4007D9FC4 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD42161D2C1DC4007D9FC4 /* GameScene.swift */; };
 		9AFD42191D2C1DC4007D9FC4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD42181D2C1DC4007D9FC4 /* GameViewController.swift */; };
 		9AFD421C1D2C1DC4007D9FC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD421A1D2C1DC4007D9FC4 /* Main.storyboard */; };
@@ -37,9 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9AA2AFAC1D2DBAA2005A220D /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = ../Button.swift; sourceTree = "<group>"; };
+		9AA2AFAE1D2DCA33005A220D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		9AFD420F1D2C1DC4007D9FC4 /* helloSpriteKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = helloSpriteKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFD42121D2C1DC4007D9FC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9AFD42141D2C1DC4007D9FC4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		9AFD42161D2C1DC4007D9FC4 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9AFD42181D2C1DC4007D9FC4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9AFD421B1D2C1DC4007D9FC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,7 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				9AFD42121D2C1DC4007D9FC4 /* AppDelegate.swift */,
-				9AFD42141D2C1DC4007D9FC4 /* GameScene.sks */,
+				9AA2AFAC1D2DBAA2005A220D /* Button.swift */,
+				9AA2AFAE1D2DCA33005A220D /* GameScene.sks */,
 				9AFD42161D2C1DC4007D9FC4 /* GameScene.swift */,
 				9AFD42441D2C3277007D9FC4 /* AVLtree.swift */,
 				9AFD42181D2C1DC4007D9FC4 /* GameViewController.swift */,
@@ -239,7 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AFD42151D2C1DC4007D9FC4 /* GameScene.sks in Resources */,
+				9AA2AFAF1D2DCA33005A220D /* GameScene.sks in Resources */,
 				9AFD42211D2C1DC4007D9FC4 /* LaunchScreen.storyboard in Resources */,
 				9AFD421E1D2C1DC4007D9FC4 /* Assets.xcassets in Resources */,
 				9AFD421C1D2C1DC4007D9FC4 /* Main.storyboard in Resources */,
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA2AFAD1D2DBAA2005A220D /* Button.swift in Sources */,
 				9AFD42171D2C1DC4007D9FC4 /* GameScene.swift in Sources */,
 				9AFD42191D2C1DC4007D9FC4 /* GameViewController.swift in Sources */,
 				9AFD42131D2C1DC4007D9FC4 /* AppDelegate.swift in Sources */,
@@ -503,6 +507,7 @@
 				9AFD423D1D2C1DC4007D9FC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AFD423E1D2C1DC4007D9FC4 /* Build configuration list for PBXNativeTarget "helloSpriteKitTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +516,7 @@
 				9AFD42401D2C1DC4007D9FC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AFD42411D2C1DC4007D9FC4 /* Build configuration list for PBXNativeTarget "helloSpriteKitUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +525,7 @@
 				9AFD42431D2C1DC4007D9FC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
