@@ -59,6 +59,17 @@ class AVLtree:NSObject
         }
     }
     
+    class func isInvariantGood(T:AVLtree) -> Bool
+    {
+        if (abs(T.balanceFactor()) >= 2){
+            return false
+        }else if (T.isEmpty){
+            return true
+        }else{
+            return (isInvariantGood(T.left)) && (isInvariantGood(T.right))
+        }
+    }
+    
     //duplicates ignored
     func insertIntNoRotation(n:Int)
     {
@@ -131,12 +142,20 @@ class AVLtree:NSObject
     
     func rotate_RL() -> AVLtree
     {
+        if (self.left.isEmpty || self.isEmpty)
+        {
+            return AVLtree.init()
+        }
         self.left = self.left.rotate_left();
         return self.rotate_right()
     }
     
     func rotate_LR() -> AVLtree
     {
+        if (self.right.isEmpty || self.isEmpty)
+        {
+            return AVLtree.init()
+        }
         self.right = self.right.rotate_right();
         return self.rotate_left()
     }

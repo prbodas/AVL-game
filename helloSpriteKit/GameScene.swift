@@ -15,6 +15,9 @@ class GameScene: SKScene {
     var tree:AVLtree = AVLtree.init()
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
     var currentTreeLabels: [SKLabelNode] = []
+    let TREE_MAX:UInt32 = 100
+    var timerRepetitions = 0
+    var rotationTimer:NSTimer!
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -27,16 +30,15 @@ class GameScene: SKScene {
         
         //sprite setup
         man.anchorPoint = CGPointMake(0.5, 0)
-        //man.position = CGPointMake(self.frame.size.width/2, 0)
         man.xScale = 0.12
         man.yScale = 0.12
         
         //scene setup
         self.backgroundColor = UIColor.whiteColor()
         
-        self.insertToTree(5)
-        self.insertToTree(6)
-        self.insertToTree(7)
+        //self.insertToTree(5)
+        //self.insertToTree(6)
+        //self.insertToTree(7)
         //self.tree = tree.rotate_RL()
         
         man.position = CGPointMake(self.frame.size.width/2, self.getTreeYAtDepth(1.0) + 50)
@@ -61,6 +63,10 @@ class GameScene: SKScene {
         //position setting
         Button.addPositionsAndSizes(buttonarr,
                                     screenSize: CGSizeMake(self.frame.width, self.frame.height))
+        
+        //create AVL timer
+        rotationTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(GameScene.insertRandomNumToTree), userInfo: nil, repeats: true)
+
     }
     
     //tree displaying code
@@ -119,74 +125,66 @@ class GameScene: SKScene {
     
     func insertToTree(ins:Int)
     {
-            
-        //insert redisplay reposition
-        tree.insertIntNoRotation(ins)
-        self.displayEntireTree()
-        man.position = CGPointMake(self.frame.size.width/2, self.getTreeYAtDepth(1.0) + 50)
-        let balanceFactor = tree.balanceFactor()
-        if (balanceFactor == 1)
+        //if the balance is off, the user loses the game
+        if (!AVLtree.isInvariantGood(tree))
         {
-            //left>right
-            man.zRotation = CGFloat(M_PI/4);
-        }else if (balanceFactor == -1)
-        {
-            //left>right
-            man.zRotation = CGFloat(-1*M_PI/4);
-        }else if (abs(balanceFactor) > 1)
-        {
-            myLabel.text = "Game over"
-            //make the man fall down the heap
-            
-            //let rotate = SKAction.rotateByAngle(CGFloat(M_PI/4), duration:5)
+            gameOver(false)
+        }else{
+        
+            //otherwise, the game continues
+            tree.insertIntNoRotation(ins)
+            self.displayEntireTree()
+        
+            //tilt man based on post-insertion balance factor
+            man.position = CGPointMake(self.frame.size.width/2, self.getTreeYAtDepth(1.0) + 50)
+            let balanceFactor = tree.balanceFactor()
+            if (balanceFactor > 0)
+            {
+                //left>right
+                man.zRotation = CGFloat(M_PI/8);
+            }else if (balanceFactor < 0)
+            {
+                //left>right
+                man.zRotation = CGFloat(-1*M_PI/8);
+            }else{
+                man.zRotation = CGFloat(0);
+            }
         }
         
     }
     
+    func insertRandomNumToTree()
+    {
+        if (self.timerRepetitions >= 10)
+        {
+            gameOver(true)
+        }else{
+            self.timerRepetitions += 1
+            let random = Int(arc4random_uniform(TREE_MAX))
+            self.insertToTree(random)
+        }
+    }
+    
+    func gameOver(didWin:Bool)
+    {
+        rotationTimer = nil
+        
+        if (didWin)
+        {
+            myLabel.text = "You Win!"
+            man.zRotation = CGFloat(-1*M_PI/8);
+        }else{
+            myLabel.text = "Game Over"
+            let rotateMan = SKAction.moveTo(CGPointMake(0.0, 0.0), duration: 5.0)
+            man.runAction(rotateMan)
+            //exit game
+        }
+    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
         print ("touchbegan")
-        
-        /*for touch in touches{
-            let positionInScene = touch.locationInNode(self)
-            let touchedNode = self.nodeAtPoint(positionInScene)
-        
-            let name = touchedNode.name
-            
-                if name == "left"
-                {
-                    tree.rotate_left()
-                }else if name == "right"
-                {
-                    tree.rotate_right()
-                }else if name == "left-right"
-                {
-                    tree.rotate_LR()
-                }else if name == "right-left"{
-                    tree.rotate_RL()
-                }
-            
-            
-            displayEntireTree()
-        }*/
-        
-        /*for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }*/
     }
    
     override func update(currentTime: CFTimeInterval) {
