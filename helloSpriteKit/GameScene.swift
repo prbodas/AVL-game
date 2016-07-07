@@ -35,8 +35,8 @@ class GameScene: SKScene {
         self.backgroundColor = UIColor.whiteColor()
         
         self.insertToTree(5)
-        self.insertToTree(2)
-        self.insertToTree(1)
+        self.insertToTree(6)
+        self.insertToTree(7)
         //self.tree = tree.rotate_RL()
         
         man.position = CGPointMake(self.frame.size.width/2, self.getTreeYAtDepth(1.0) + 50)
@@ -78,17 +78,17 @@ class GameScene: SKScene {
     func displayTree(depth:CGFloat)
     {
         
-        print("in method")
+        //print("in method")
         let center_at = (self.frame.width/2.0)/(pow(2.0,depth-1.0)+1.0)
-        print ("Center_at = \(center_at)")
+        //print ("Center_at = \(center_at)")
         var current = center_at + 256.0
-        print ("Current = \(current)")
+        //print ("Current = \(current)")
         let arr = tree.getNumsAtDepth(Int(depth))
-        print("arr = \(arr)")
+        print("arr = \(arr) at depth \(depth)")
         
         for a in arr
         {
-            print ("looping")
+            //print ("looping")
             let newLabel = SKLabelNode(fontNamed: "Chalkduster")
             
             if (a == -1)
@@ -104,7 +104,7 @@ class GameScene: SKScene {
             currentTreeLabels.append(newLabel)
             self.addChild(newLabel)
             current = current + center_at
-            print ("Current = \(current)")
+            //print ("Current = \(current)")
         }
         
     }
@@ -143,8 +143,34 @@ class GameScene: SKScene {
         
     }
     
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
+        
+        print ("touchbegan")
+        
+        /*for touch in touches{
+            let positionInScene = touch.locationInNode(self)
+            let touchedNode = self.nodeAtPoint(positionInScene)
+        
+            let name = touchedNode.name
+            
+                if name == "left"
+                {
+                    tree.rotate_left()
+                }else if name == "right"
+                {
+                    tree.rotate_right()
+                }else if name == "left-right"
+                {
+                    tree.rotate_LR()
+                }else if name == "right-left"{
+                    tree.rotate_RL()
+                }
+            
+            
+            displayEntireTree()
+        }*/
         
         /*for touch in touches {
             let location = touch.locationInNode(self)
